@@ -38,7 +38,7 @@ const config: HardhatUserConfig = {
     // If the network you are looking for is not here you can add new network settings
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
+        url: `https://mainnet.infura.io/v3/dc12cdcb63614e568268feb36f25b57a`,
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
     },
