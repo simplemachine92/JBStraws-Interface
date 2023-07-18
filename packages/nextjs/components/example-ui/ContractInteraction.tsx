@@ -20,7 +20,7 @@ export const ContractInteraction = () => {
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const leaves = [
-    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "0x55A178b6AfB3879F4a16c239A9F528663e7d76b3",
     "0x00000000000000000000000000000000000004d2",
     "0x0000000000000000000000000000000000003039",
     "0x000000000000000000000000000000000001E240",
@@ -102,27 +102,26 @@ export const ContractInteraction = () => {
       <DiamondIcon className="absolute top-24" />
       <CopyIcon className="absolute bottom-0 left-36" />
       <HareIcon className="absolute right-0 bottom-24" />
-      <div className="flex flex-col w-full mx-5 sm:mx-8 2xl:mx-20">
+      <div className="flex flex-col w-3/4 mx-5 sm:mx-8 2xl:mx-20">
         <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
-          <span className="text-4xl sm:text-4xl text-black">Delegate Allow List Root Hash:</span>
+          <span className="text-lg text-black">Delegate Allow List Root Hash:</span>
 
-          <div className="mt-4 ml-2 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
-            <span className="text-lg leading-tight">{contractRoot}</span>
+          <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
+            <span className="text-2xs leading-tight">{contractRoot}</span>
           </div>
         </div>
 
         <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
-          <span className="text-4xl sm:text-4xl text-black">Generate a new Merkle Root</span>
+          <span className="text-lg text-black mb-2">Generate Merkle Root (Paste list and press Enter)</span>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
             <form onSubmit={handleSubmit} className="w-full">
               <input
                 type="text"
                 name="csv"
-                className="input mb-4 font-bai-jamjuree w-full px-5 py-2 bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] border border-primary text-lg sm:text-2xl placeholder-white uppercase"
-                placeholder="Enter comma separated values"
+                className="input mb-2 mt-2 py-2 font-bai-jamjuree w-full h-1/4 bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] border border-primary text-md sm:text-2xl placeholder-white uppercase"
+                placeholder="Enter CSVs"
               />
-              <span className="text-lg ml-2">{root ? root : "Waiting for input..."}</span>
             </form>
             <button
               className={`btn btn-primary rounded-full capitalize font-normal font-white w-24 flex items-center gap-1 hover:gap-2 transition-all tracking-widest ${
@@ -132,29 +131,32 @@ export const ContractInteraction = () => {
             >
               {!isLoading2 && (
                 <>
-                  Send <ArrowSmallRightIcon className="w-3 h-3 mt-0.5" />
+                  Set <ArrowSmallRightIcon className="w-3 h-3 mt-0.5" />
                 </>
               )}
             </button>
           </div>
+
+          <span className="ml-2 mt-2 text-2xs">{root ? root : "Waiting for input..."}</span>
         </div>
 
-        <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
-          <span className="text-4xl sm:text-4xl text-black">Are you on the whitelist?</span>
-          {/* <span className="text-lg mt-4 sm:text-xl text-black">You: {address != undefined? address : "Loading" }</span> */}
+        {/* <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
+          <span className="text-2xs sm:text-xs text-black">Are you on the whitelist?</span>
+          <span className="text-lg mt-4 sm:text-xl text-black">You: {address != undefined? address : "Loading" }</span>
 
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
-            <span className="text-4xl">{verified !== null ? `Verified: ${verified}` : "Waiting for input..."}</span>
+            <span className="text-xs">{verified !== null ? `Whitelisted?: ${verified}` : "Waiting for input..."}</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
-          <span className="text-2xl sm:text-4xl text-black">Pay via JBTerminal (Demonstrate Access)</span>
+          <span className="text-2xs sm:text-lg text-black">Pay via JBTerminal (If Whitelisted)</span>
+          <span className="text-xs">{verified !== null ? `Whitelisted: ${verified}` : "Waiting for input..."}</span>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
             <input
               type="number"
-              placeholder="Input an amount to pay!"
+              placeholder="ETH Amount"
               className="input font-bai-jamjuree w-full px-5 bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] border border-primary text-lg sm:text-2xl placeholder-white uppercase"
               onChange={e => setNewValue(e.target.value)}
             />
@@ -176,10 +178,10 @@ export const ContractInteraction = () => {
             </div>
           </div>
 
-          <div className="mt-4 flex gap-2 items-start">
+          {/* <div className="flex gap-2 items-start">
             <span className="text-sm leading-tight">Paying:</span>
             <div className="badge badge-warning">{newValue}</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
